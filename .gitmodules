@@ -1,0 +1,3 @@
+[submodule "lib/tasks/git-rake"]
+	path = lib/tasks/git-rake
+	url = git://github.com/mdalessio/git-rake.git
