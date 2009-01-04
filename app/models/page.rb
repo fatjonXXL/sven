@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
 
 	acts_as_nested_set :text_column => 'title'
 	acts_as_paranoid
-	acts_as_versioned
+	#acts_as_versioned
 
 	belongs_to :layout
 	belongs_to :template, :class_name => 'ContentTemplate'
@@ -21,12 +21,12 @@ class Page < ActiveRecord::Base
 
 	validates_presence_of :title, :layout, :status
 
-	define_index do
-    indexes title, :sortable => true
-		indexes body
+	#define_index do
+  #  indexes title, :sortable => true
+	#	indexes body
 
-    has created_at, updated_at
-  end
+  #  has created_at, updated_at
+  #end
     
   def published?
     status == Status[:published]
