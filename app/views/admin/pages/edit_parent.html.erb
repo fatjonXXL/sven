@@ -1,0 +1,18 @@
+<% content_for :title do %>
+	Editace stánky "<%= @page.title %>"
+<% end %>
+
+<% form_for :page, @page, :url => admin_page_path(@page), :html => { :multipart => true, :method => :put } do |f| %>
+	<div class="small">
+		Nadřazená stránka: <br /><br />
+		<ul>
+			<li><%= radio_button_tag :parent, 0, { :checked => "" } %> neměnit</li>
+		<% @pagelist.each do |page| %>
+			<li><%= radio_button_tag :parent, page.id %> <%= page.title %></li>
+		<% end %>
+		</ul>
+		<br />
+		
+		<div><%= f.submit 'upravit', { :class => :small } %></div>
+	</div>
+<% end %>

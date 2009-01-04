@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Editace šablony "<%= @tmpl.name %>"
+<% end %>
+
+<% form_for :template, @tmpl, :url => admin_template_path(@tmpl), :html => { :method => :put } do |@f| %>
+	<%= render :partial => 'admin/templates/form' %>
+<% end %>

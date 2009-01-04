@@ -1,0 +1,7 @@
+<tr>
+	<td><div class="h2"><%= tag_name %></div></td>
+	<td class="small"><%= submit_tag "vložit tag", { :onclick => "insertTag('<s:#{tag_name} />')" } %></td>
+</tr>
+<tr class="bordered">
+	<td colspan="2"><%= description.gsub(/\n/, '<br />') %></td>
+</tr>

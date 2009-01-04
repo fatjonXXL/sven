@@ -1,0 +1,15 @@
+<% if @active_languages.size > 1 %>
+<div id="select-language">
+	<ul>
+	<% @active_languages.each do |active| %>
+		<li><a href="/change-language/<%= active %>">
+		<% if @tag_attributes['version'] == "image" %>
+			<img src="/images/flagicons/<%= active %>.png" alt="<%= active %>" />
+		<% else %>
+			<%= active %>
+		<% end %>
+		</a></li>
+	<% end %>
+	</ul>
+</div>
+<% end %>

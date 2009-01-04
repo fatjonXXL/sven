@@ -1,0 +1,18 @@
+<table>
+	<tr>
+		<td>Název:</td>
+		<td><%= @f.text_field :name, { :size => 30 } %></td>
+	</tr>
+	<tr>
+		<td>Identifikátor:</td>
+		<td><%= @f.text_field :identifier, { :size => 30 } %></td>
+	</tr>
+	<tr>
+		<td>Popis:</td>
+		<td><%= @f.text_field :description, { :size => 30 } %></td>
+	</tr>
+</table>
+
+<div class="small">
+	<%= @f.submit 'uložit', { :class => "small" } %> nebo <%= link_to "zpět", admin_menus_url %>
+</div>

@@ -1,0 +1,21 @@
+development:
+  adapter: mysql
+  host: localhost
+  database: sven_ms
+  username: comz
+  password: login1986
+  encoding: utf8
+  collation: utf8_general_ci
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+
+production:
+  adapter: mysql
+  host: localhost
+  database: sven_ms_prod
+  username: comz
+  password: login1986
+  encoding: utf8
+  collation: utf8_general_ci

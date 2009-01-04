@@ -1,0 +1,41 @@
+<% content_for :title do %>
+	Nová položka menu "<%= @menu.name %>"
+<% end %>
+
+<% form_for @menu_item, :url => admin_process_add_child_url( :id => @menu ), :html => { :method => :post } do |f| %>
+	<table>
+		<tr>
+			<td>Název:</td>
+			<td><%= f.text_field :name, { :size => 30 } %></td>
+		</tr>
+		<tr>
+			<td colspan="2"><%= f.check_box :published %> Publikováno?</td>
+		</tr>
+		<tr>
+			<td>Menu:</td>
+			<td><%= f.select :menu_id, Menu.get_select %></td>
+		</tr>
+		<tr>
+			<td>Obsah menu:</td>
+			<td>
+				<table>
+					<tr>
+						<td>Stránka:</td>
+						<td><%= f.select :page, Page.get_select, { :selected => 0 }, { :size => 5 } %></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align: center;"><em>nebo</em></td>
+					</tr>
+					<tr>
+						<td>Odkaz:</td>
+						<td><%= f.text_field :link, { :value => "http://", :size => 30 } %></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<div class="small">
+	<%= f.submit 'uložit', { :class => "small" } %> nebo <%= link_to "zpět", admin_menu_url( @menu ) %>
+	</div>
+<% end %>

@@ -1,0 +1,22 @@
+<% content_for :title do %>
+	Stránky
+<% end %>
+<table class="full-length" id="site-map" summary="">
+	<thead>
+		<tr>
+			<th class="page">Stránka</th>
+			<th class="status">Stav</th>
+			<th class="modify" colspan="3">Úpravy</th>
+		</tr>
+	</thead>
+	<tbody id="pageslist">
+		<%= pages_list %>
+	</tbody>
+</table>
+<br />
+<div>
+	Zobrazit jazyk:
+	<% (eval Configuration['site.langs']).each do |lang| %>
+	<%= link_to_remote image_tag("flagicons/#{lang}.png"), :url => admin_pages_list_url(lang) %>
+	<% end %>
+</div>

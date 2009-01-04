@@ -1,0 +1,20 @@
+<% content_for :title do %>
+	Nastavení
+<% end %>
+<table class="full-length small">
+	<tr>
+		<th>Klíč</th>
+		<th>Hodnota</th>
+	</tr>
+<% form_tag save_admin_options_url do %>
+	<% for config in @options  %>
+	<tr>
+		<td><%= config.key %></td>
+		<td><%= make_formable(config) %></td>
+	</tr>
+	<% end %>
+	<tr>
+		<td colspan="2"><%= submit_tag 'uložit' %></td>
+	</tr>
+<% end %>
+</table>

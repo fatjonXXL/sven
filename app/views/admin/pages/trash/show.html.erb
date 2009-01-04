@@ -1,0 +1,41 @@
+<% content_for :title do %>
+	Detail stránky "<%= @page.title %>"
+<% end %>
+<div>
+	<table class="full-length">
+		<tr>
+			<th>Adresa:</th>
+			<td><%= @page.slug %></td>
+		</tr>
+		<tr>
+			<th>Stav:</th>
+			<td><%= @page.status.name %></td>
+		</tr>
+		<tr>
+			<th>Vzhled:</th>
+			<td><%= @page.layout.name %></td>
+		</tr>
+		<tr>
+			<th>Šablona:</th>
+			<td><%= @page.template.name %></td>
+		</tr>
+		<tr>
+			<th>Popis:</th>
+			<td><%= @page.description %></td>
+		</tr>
+		<tr>
+			<th>Klíčová slova:</th>
+			<td><%= @page.keywords %></td>
+		</tr>
+		<tr>
+			<th>Obsah:</th>
+			<td class="trash-body"><%= h @page.body %></td>
+		</tr>
+	</table>
+</div>
+
+<div class="small">
+	<%= form_tag admin_page_trash_restore_url( @page ) %>
+	<%= submit_tag "obnovit", :class => 'small' %> nebo <%= link_to "zpět", :back %>
+	</form>
+</div>

@@ -1,0 +1,1 @@
+page.insert_html :bottom, :appendixes, :partial => 'admin/pages/add_appendix'

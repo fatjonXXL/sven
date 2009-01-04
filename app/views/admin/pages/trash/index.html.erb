@@ -1,0 +1,23 @@
+<% content_for :title do %>
+	Koš
+<% end %>
+
+<table class="full-length" id="site-map">
+	<thead>
+		<tr>
+			<th class="page">Název</th>
+			<th class="status">Smazáno</th>
+			<th class="modify" colspan="2">Možnosti</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% for page in @pages %>
+		<tr>
+			<td><%= link_to page.title, admin_page_trash_show_url( page ) %></td>
+			<td><%= page.deleted_at.to_s( :czech_time24 ) %></td>
+			<td><%= link_to "obnovit", admin_page_trash_restore_url( page.id ), icon( :page_go ) %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<%= "<h3>Žádné stránky nebyly nalezeny!</h3>" if @pages.blank? %>

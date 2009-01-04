@@ -1,0 +1,58 @@
+<div>
+	Titulek:
+	<%= @f.text_field :title, { :size => 60 } %><br />
+	<span class="small"><%= showmore('page-more', 'show-more')%></span>
+
+	<div id="page-more" style="display: none;">
+		<table class="small">
+			<tr>
+				<td>Typ stránky:</td>
+				<td><%= @f.select :class_name, Page.descendants, { :selected => @page.class_name } %></td>
+			</tr>
+			<tr>
+				<td>Adresa:</td>
+				<td><%= @f.text_field :slug %></td>
+			</tr>
+			<tr>
+				<td>Stav:</td>
+				<td><%= @f.select :status_id, Status.get_select, { :selected => @page.status_id || 1 } %></td>
+			</tr>
+			<tr>
+				<td>Vzhled:</td>
+				<td><%= @f.select :layout_id, Layout.get_select, { :selected => @page.layout_id || 1 } %></td>
+			</tr>
+			<tr>
+				<td>Použít šablonu:</td>
+				<td><%= @f.select :template_id, ContentTemplate.get_select, { :selected => @page.template_id || 1 } %></td>
+			</tr>
+			<tr>
+				<td>Popis:</td>
+				<td><%= @f.text_field :description %></td>
+			</tr>
+			<tr>
+				<td>Klíčová slova:</td>
+				<td><%= @f.text_field :keywords %></td>
+			</tr>
+			<tr>
+				<td>Jazyk:</td>
+				<td><%= @f.select :language, (eval Configuration['site.langs']).map { |lng| [lng[lng.to_sym], lng] }, { :selected => @page.language || session[:selected_language] } %></td>
+			</tr>
+		</table>
+	</div>
+	<div class="cleaner"></div>
+</div>
+
+<div>
+	Obsah:<br />
+	<%= @f.text_area :body, { :rows => 20, :style => 'width: 100%;' } %>
+</div>
+
+<span class="small float-right"><%= link_to_remote '[přidat přílohu]', :url => { :action => 'add_appendix' } %></span>
+<div id="appendixes">
+	<%= render :partial => 'admin/pages/appendixes' %>
+</div>
+
+<div class="small">
+	<%= hidden_field_tag 'parent', params[:parent] %>
+	<%= @f.submit 'uložit', { :class => "small" } %>&nbsp;<%= @f.submit 'uložit a pokračovat', { :name => "save_and_continue", :class => "small" } %> nebo <%= link_to "zpět", admin_pages_url %>
+</div>

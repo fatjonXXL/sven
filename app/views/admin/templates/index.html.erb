@@ -1,0 +1,24 @@
+<% content_for :title do %>
+	Šablony
+<% end %>
+<table class="full-length" id="site-map" summary="">
+	<thead>
+		<tr>
+			<th class="page">Šablona</th>
+			<th class="modify" colspan="2">Úpravy</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @tmpls.each do |template| %>
+			<tr>
+				<td><%= link_to template.name, edit_admin_template_path( template ) %></td>
+				<td class="remove"><%= delete_link admin_template_url( template ) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= "<h3>Žádná šablona nenalezena</h3>" if @tmpls.blank? %>
+<br />
+<div>
+	<%= link_to "#{image_tag 'add-child.png'}&nbsp;Nová šablona", new_admin_template_url %>
+</div>

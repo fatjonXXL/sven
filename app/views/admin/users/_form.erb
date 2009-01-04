@@ -1,0 +1,30 @@
+<table class="full-length small">
+	<tr>
+		<td>Login</td>
+		<td><%= form.text_field :login %></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><%= form.text_field :email %></td>
+	</tr>
+	<tr>
+		<td><%= form.object.new_record? ? "Heslo" : "Nové heslo" %></td>
+		<td><%= form.password_field :password %></td>
+	</tr>
+	<tr>
+		<td>Potvrzení hesla</td>
+		<td><%= form.password_field :password_confirmation %></td>
+	</tr>
+	<% if current_user.has_permission?( "manage_users" ) %>
+	<tr class="vertical-top">
+		<td>Práva</td>
+		<td>
+			<ul class="vertical">
+				<% for permission in @permissions %>
+					<li><%= check_box_tag "user[permission_ids][]", permission.id, @user.permissions.include?(permission) %> <%= permission.identifier %></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<% end %>
+</table>

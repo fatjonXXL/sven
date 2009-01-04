@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Nový vzhled
+<% end %>
+
+<% form_for admin_layout_url( @layout ) do |@f| %>
+	<%= render :partial => 'admin/layouts/form' %>
+<% end %>

@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Nové menu
+<% end %>
+
+<% form_for @menu, :url => admin_menu_url( @menu ), :html => { :method => :post } do |@f| %>
+	<%= render :partial => 'admin/pages/menu_builder/form' %>
+<% end %>

@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Nová šablona
+<% end %>
+
+<% form_for(:template, @tmpl, :url => { :action => 'create' }) do |@f| %>
+	<%= render :partial => 'admin/templates/form' %>
+<% end %>

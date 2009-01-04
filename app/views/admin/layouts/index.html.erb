@@ -1,0 +1,26 @@
+<% content_for :title do %>
+	Vzhledy
+<% end %>
+
+<table class="full-length" id="site-map">
+	<thead>
+		<tr>
+			<th class="page">Název</th>
+			<th class="status">Typ vzhledu</th>
+			<th class="modify" colspan="2">Úpravy</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% for lay in @layouts %>
+		<tr>
+			<td><%= link_to lay.name, edit_admin_layout_url(lay) %></td>
+			<td><%= lay.content_type %></td>
+			<td><%= delete_link admin_layout_url(lay) %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<br />
+<div>
+	<%= add_link "Nový vzhled", new_admin_layout_url %>
+</div>

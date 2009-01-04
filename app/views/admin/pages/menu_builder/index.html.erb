@@ -1,0 +1,29 @@
+<% content_for :title do %>
+	Menu
+<% end %>
+
+<table class="full-length" id="site-map">
+	<thead>
+		<tr>
+			<th class="page">Název</th>
+			<th class="status">Počet položek</th>
+			<th class="modify" colspan="3">Možnosti</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% for menu in @menus %>
+		<tr>
+			<td><%= link_to menu.name, admin_edit_menu_url( menu ) %></td>
+			<td><%= menu.menu_items.size %></td>
+			<td><%= link_to "přidat položku", admin_add_child_menu_url( menu ), icon( :script_add ) %></td>
+			<td><%= link_to "zobrazit položky", admin_show_menu_url( menu ), icon( :script_code_red ) %></td>
+			<td><%= delete_link admin_destroy_menu_url( menu ) %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<br />
+<%= "<h3>Žádné menu nebylo nalezeno !</h3>" if @menus.blank? %>
+<div>
+	<%= add_link "Nové menu", admin_new_menu_url %>
+</div>

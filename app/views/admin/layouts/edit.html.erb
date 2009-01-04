@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Editace vzhledu "<%= @layout.name %>"
+<% end %>
+
+<% form_for :layout, @layout, :url => admin_layout_path(@layout), :html => { :method => :put } do |@f| %>
+	<%= render :partial => 'admin/layouts/form' %>
+<% end %>

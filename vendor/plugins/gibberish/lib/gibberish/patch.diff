@@ -1,0 +1,9 @@
+3c3
+<     @@default_language = :cz
+---
+>     @@default_language = :en
+56,57c56
+< 				file = YAML.load_file(file)
+<         @@languages[key].merge! file.symbolize_keys if file
+---
+>         @@languages[key].merge! YAML.load_file(file).symbolize_keys

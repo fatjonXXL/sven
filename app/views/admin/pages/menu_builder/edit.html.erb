@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Editace menu "<%= @menu.name %>"
+<% end %>
+
+<% form_for :menu, @menu, :url => admin_menu_url( @menu ), :html => { :method => :put } do |@f| %>
+	<%= render :partial => 'admin/pages/menu_builder/form' %>
+<% end %>

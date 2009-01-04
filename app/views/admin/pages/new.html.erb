@@ -1,0 +1,7 @@
+<% content_for :title do %>
+	Nová stránka
+<% end %>
+
+<% form_for @page, :url => admin_page_url( @page ), :html => { :multipart => true } do |@f| %>
+	<%= render :partial => 'admin/pages/form' %>
+<% end %>

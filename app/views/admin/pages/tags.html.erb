@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>openWYSIWYG | Create or Modify Link</title>
+</head>
+<style>
+<!--
+body { background-color: gray; }
+a { font-size: 10px; color: black; }
+
+table { border-collapse: collapse; width: 97%; }
+td { float: left; }
+
+.h2 { font-size: 200%; color: white; font-weight: bold; }
+.small { width: 50px; float: right; }
+.bordered { border-bottom: 1px black solid; }
+//-->
+</style>
+<script type="text/javascript" src="/javascripts/openwysiwyg/scripts/wysiwyg-popup.js"></script>
+<script type="text/javascript">
+
+/* ---------------------------------------------------------------------- *\
+  Function    : insertTag()
+  Description : Insert the tag into the iframe html area
+\* ---------------------------------------------------------------------- */
+function insertTag(tag) {
+	var n = WYSIWYG_Popup.getParam('wysiwyg');
+
+  // insert tag
+	WYSIWYG.insertHTML(tag, n);
+	window.close();
+}
+
+</script>
+<body>
+<table>
+	<%= tag_reference "Sven::StandardTags" %>
+</table>
+</body>
+</html>
