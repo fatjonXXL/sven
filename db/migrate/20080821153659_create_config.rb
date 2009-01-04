@@ -12,11 +12,6 @@ class CreateConfig < ActiveRecord::Migration
 		say						"adding indexes ..."
 		add_index :config, :key
 		add_index :config, :value
-		
-		Configuration.create :key => 'site.title', :value => '"svenMS"'
-		Configuration.create :key => 'site.langs', :value => '["cz"]', :option_type => 'check', :values => '[["czech", "cz"],["english", "en"]]'
-    Configuration.create :key => 'site.description', :value => '"Content Management System napsany v Ruby on Rails"'
-    Configuration.create :key => 'site.keywords', :value => '"web,programovani,rails,ruby,ruby on rails,cms,content,web 2.0"'
   end
 
   def self.down

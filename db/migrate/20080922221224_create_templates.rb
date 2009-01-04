@@ -6,9 +6,6 @@ class CreateTemplates < ActiveRecord::Migration
 
       t.timestamps
     end
-    
-    ContentTemplate.create :name => 'Standardní', :content => '<s:content />'
-    ContentTemplate.create :name => 'Hledání', :content => '<s:content /><br /><br />HLEDÁNÍ'
   end
 
   def self.down
