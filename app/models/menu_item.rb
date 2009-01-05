@@ -2,7 +2,7 @@ class MenuItem < ActiveRecord::Base
   before_save :linkit
   
   belongs_to :menu
-  #acts_as_nested_set
+  acts_as_nested_set
   
   attr_accessor :page
   attr_accessor :url
