@@ -28,22 +28,25 @@ class PopulateDb < ActiveRecord::Migration
     ContentTemplate.create :name => 'Hledání', :content => '<s:content /><br /><br />HLEDÁNÍ'
     
     @admin_pass = User.generate_password
-    @admin = User.create :full_name => 'Jan Komzák', :login => 'admin', :email => 'komzak@comz.cz', :password => @admin_pass, :password_confirmation => @admin_pass
+    @admin = User.new :full_name => 'Jan Komzák', :login => 'admin', :email => 'komzak@comz.cz'
+    @admin.password = @admin_pass
+    @admin.password_confirmation = @admin_pass
+    @admin.save!
+    
     say "Admin password: #{@admin_pass}"
     @admin.deliver_email_with_password!( @admin_pass )
-    User.create :full_name => 'Jan Komzák', :login => 'comz', :email => 'komzak@gmail.com', :password => @admin_pass, :password_confirmation => @admin_pass
-	  
+    @comz = User.name :full_name => 'Jan Komzák', :login => 'comz', :email => 'komzak@gmail.com'
+    @comz.password = @admin_pass
+    @comz.password_confirmation = @admin_pass
+    @comz.save!
+    
     Permission.create :identifier => 'edit_content'
     Permission.create :identifier => 'destroy_content'
     Permission.create :identifier => 'manage_users'
     Permission.create :identifier => 'manage_options'
     Permission.create :identifier => 'manage_plugins'
     
-    @admin = User.first
     @admin.permission_ids = [ 1, 2, 3, 4, 5 ]
-    @admin.save!
-    
-    @comz = User.last
     @comz.permission_ids = [ 1, 5 ]
 	  
     Menu.create :name => 'Hlavní menu', :description => 'Všechny stránky jako položky menu', :identifier => 'mainmenu'
