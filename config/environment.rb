@@ -16,6 +16,7 @@ require File.join(File.dirname(__FILE__), '../vendor/plugins/engines/boot')
 
 Rails::Initializer.run do |config|
   config.gem "mysql"
+  config.gem "authlogic"
   
   config.time_zone = 'Prague'
   config.action_controller.session = {
