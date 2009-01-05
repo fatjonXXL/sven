@@ -14,14 +14,4 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
-
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-  :address  => "mail.comz.cz",
-  :port  => 26, 
-  :domain  => 'www.comz.cz',
-  :user_name  => "testing@comz.cz",
-  :password  => "testovaci-email",
-  :authentication  => :cram_md5
-}
+config.action_mailer.raise_delivery_errors = true

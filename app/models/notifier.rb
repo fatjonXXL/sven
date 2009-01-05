@@ -1,6 +1,4 @@
 class Notifier < ActionMailer::Base
-  default_url_options[:host] = "sven.prace.rails"
-
   def password_reset_instructions( user )
     subject       "Zapomenute heslo"
     from          "sven@comz.cz"

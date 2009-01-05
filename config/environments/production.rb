@@ -22,9 +22,9 @@ config.action_controller.perform_caching             = true
 config.action_mailer.raise_delivery_errors = true
 
 # Konfigurace emailu
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-  :address  => "smtp-out.xnet.cz",
-  :port => 25,
-  :domain => "sven.free.railshosting.cz" 
-}
+#ActionMailer::Base.delivery_method = :smtp
+#ActionMailer::Base.smtp_settings = {
+#  :address  => "smtp-out.xnet.cz",
+#  :port => 25,
+#  :domain => "sven.free.railshosting.cz" 
+#}

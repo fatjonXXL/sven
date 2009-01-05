@@ -25,3 +25,16 @@ Rails::Initializer.run do |config|
   }
 end
 
+ActionMailer::Base.delivery_method = :sendmail  
+ActionMailer::Base.perform_deliveries = true  
+ActionMailer::Base.raise_delivery_errors = true  
+ActionMailer::Base.default_charset = "utf-8"
+ActionMailer::Base.smtp_settings = {
+  :address  => "mail.comz.cz",
+  :domain  => 'www.comz.cz',
+  :port  => 25, 
+  :user_name  => "testing@comz.cz",
+  :password  => "testovaci-email",
+  :authentication  => :cram_md5
+}
+
