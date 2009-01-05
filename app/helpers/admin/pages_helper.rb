@@ -55,7 +55,7 @@ module Admin::PagesHelper
 				else
 				  childs << "<td></td><td></td>"
 			  end
-				childs << "<td class=\"remove\">#{delete_link( admin_destroy_page_url( page ) ) unless page.slug == '/' or (not current_user.has_permission?(:destroy_content))}</td>"
+				childs << "<td class=\"remove\">#{delete_link( admin_destroy_page_url( page ) ) if (not page.slug == '/') and current_user.has_permission?(:destroy_content)}</td>"
 				childs << "</tr>\n"
 				unless page.children.blank?
 					childs << page_children(page.id)

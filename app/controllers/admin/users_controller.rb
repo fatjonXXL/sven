@@ -76,7 +76,7 @@ class Admin::UsersController < AdminController
       flash[:notice] = "Heslo bylo upraveno."
       redirect_to account_url
     else
-      render :action => :edit
+      render :action => :restore_password
     end
   end
   

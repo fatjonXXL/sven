@@ -25,7 +25,7 @@ Rails::Initializer.run do |config|
   }
 end
 
-ExceptionNotifier.exception_recipients = %w(komzak@gmail.com komzak@comz.cz)
+ExceptionNotifier.exception_recipients = %w(komzak@comz.cz)
 
 ActionMailer::Base.delivery_method = :sendmail  
 ActionMailer::Base.perform_deliveries = true  

@@ -2,7 +2,7 @@
 	Můj profil
 <% end %>
 
-<% form_for @user do |f| %>
+<% form_for :user, @user, :url => admin_user_url( @user ) do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
   <%= f.submit "upravit" %>
