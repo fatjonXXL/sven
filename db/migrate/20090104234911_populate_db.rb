@@ -28,15 +28,13 @@ class PopulateDb < ActiveRecord::Migration
     ContentTemplate.create :name => 'Hledání', :content => '<s:content /><br /><br />HLEDÁNÍ'
     
     @admin_pass = User.generate_password
-    @admin = User.new :full_name => 'Jan Komzák', :login => 'admin', :email => 'komzak@comz.cz'
-    @admin.password = @admin_pass
+    @admin = User.new :full_name => 'Jan Komzák', :login => 'admin', :email => 'komzak@comz.cz', :password => @admin_pass
     @admin.password_confirmation = @admin_pass
     @admin.save!
     
     say "Admin password: #{@admin_pass}"
     @admin.deliver_email_with_password!( @admin_pass )
-    @comz = User.name :full_name => 'Jan Komzák', :login => 'comz', :email => 'komzak@gmail.com'
-    @comz.password = @admin_pass
+    @comz = User.name :full_name => 'Jan Komzák', :login => 'comz', :email => 'komzak@gmail.com', :password => @admin_pass
     @comz.password_confirmation = @admin_pass
     @comz.save!
     
