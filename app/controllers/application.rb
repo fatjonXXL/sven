@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ExceptionNotifiable
+
 	layout "sven"
 	
   protect_from_forgery # :secret => '62f86ba559f3652e400be19d048495c8'

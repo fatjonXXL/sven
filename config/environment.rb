@@ -25,6 +25,8 @@ Rails::Initializer.run do |config|
   }
 end
 
+ExceptionNotifier.exception_recipients = %w(komzak@gmail.com komzak@comz.cz)
+
 ActionMailer::Base.delivery_method = :sendmail  
 ActionMailer::Base.perform_deliveries = true  
 ActionMailer::Base.raise_delivery_errors = true  
@@ -35,6 +37,6 @@ ActionMailer::Base.smtp_settings = {
   :port  => 25, 
   :user_name  => "testing@comz.cz",
   :password  => "testovaci-email",
-  :authentication  => :cram_md5
+  :authentication  => :login
 }
 
