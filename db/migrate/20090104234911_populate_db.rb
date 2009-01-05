@@ -35,6 +35,7 @@ class PopulateDb < ActiveRecord::Migration
     
     say "Admin password: #{@admin_pass}"
     @admin.deliver_email_with_password!( @admin_pass )
+    
     @comz = User.new :full_name => 'Jan Komzák', :login => 'comz', :email => 'komzak@gmail.com'
     @comz.password = @admin_pass
     @comz.password_confirmation = @admin_pass
