@@ -11,7 +11,7 @@ class PopulateDb < ActiveRecord::Migration
 		Layout.create :name => 'Prázdný', :content => '<s:template_content />', :content_type => 'text/css'
 		
      # VERSIONS
-    Page.create_versioned_table
+    #Page.create_versioned_table
     
 		# INITIAL DATA
 		say						"loading initial data ..."
@@ -50,6 +50,6 @@ class PopulateDb < ActiveRecord::Migration
   end
 
   def self.down
-    Page.destroy_versioned_table
+    #Page.destroy_versioned_table
   end
 end

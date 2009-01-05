@@ -8,7 +8,7 @@ class Page < ActiveRecord::Base
 
 	acts_as_nested_set :text_column => 'title'
 	acts_as_paranoid
-	acts_as_versioned
+	#acts_as_versioned
 
 	belongs_to :layout
 	belongs_to :template, :class_name => 'ContentTemplate'
