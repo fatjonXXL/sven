@@ -1,5 +1,5 @@
 <% content_for :title do %>
-	Můj profil
+	<%= @user == current_user ? "Můj profil" : "Editace uživatele \"#{@user.login}\"" %>
 <% end %>
 
 <% form_for :user, @user, :url => admin_user_url( @user ) do |f| %>
