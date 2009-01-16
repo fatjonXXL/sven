@@ -1,9 +1,10 @@
 module Admin::PagesHelper
 	def pages_list
 		@first_page ||= Page.find_by_slug '/'
-		@whole_menu ||= page_children
+		@menu = page_children
+		@menu << "<tr><td colspan=\"2\"><h4>Vybraný jazyk: <strong>#{t session[:selected_language]}</strong></h4></td></tr>" if Configuration['site.langs'].size > 1
 
-		@whole_menu
+		@menu
   end
   
 	def tag_reference(class_name)
@@ -26,7 +27,7 @@ module Admin::PagesHelper
       end
 			app << image_tag(image, { :style => "width: 16px; height: 16px;", :alt => appendix.filename})
 			app << "&nbsp;&nbsp;#{appendix.filename}&nbsp;&nbsp;"
-			app << link_to_remote("smazat", :url => { :action => "remove_appendix", :id => appendix.id })
+			app << link_to_remote("[-] smazat", :url => { :action => "remove_appendix", :id => appendix.id }, :update => 'appendixes', :confirm => 'Opravdu smazat ?')
 			app << "</span><br />"
     end
 	end
@@ -61,6 +62,9 @@ module Admin::PagesHelper
 					childs << page_children(page.id)
 				end
 			end
+			if childs.blank?
+			  childs << "<tr><td colspan=\"2\">Nebyly nalezeny žádné stránky</td></tr>"
+			end			
 			childs
 		end
 

@@ -1,15 +1,15 @@
 <% content_for :title do %>
-	Nastavení
+	<%= t :options %>
 <% end %>
 <table class="full-length small">
 	<tr>
-		<th>Klíč</th>
-		<th>Hodnota</th>
+		<th><%= t :key %></th>
+		<th><%= t :value %></th>
 	</tr>
-<% form_tag save_admin_options_url do %>
+<% form_tag admin_save_options_url do %>
 	<% for config in @options  %>
 	<tr>
-		<td><%= config.key %></td>
+		<td><%= t config.key.to_sym %></td>
 		<td><%= make_formable(config) %></td>
 	</tr>
 	<% end %>

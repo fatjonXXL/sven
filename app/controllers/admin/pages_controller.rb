@@ -72,27 +72,9 @@ class Admin::PagesController < AdminController
 		redirect_to admin_pages_url
 	end
 
-	def wysiwyg
-		@css = Css.all
-		@css_string = ""
-		@css.each do |css|
-			@css_string << css.body
-		end
-		
-		respond_to do |format|
-			format.html { render :action => "wysiwyg", :layout => false }
-    end
-	end
-
-	def tags
-		respond_to do |format|
-			format.html { render :action => "tags", :layout => false }
-    end
-	end
-
 	def add_appendix
 		respond_to do |format|
-			format.js
+		  format.html { render :partial => 'admin/pages/add_appendix', :layout => false }
     end
 	end
 
@@ -102,7 +84,7 @@ class Admin::PagesController < AdminController
 		@appendix.destroy
 
 		respond_to do |format|
-			format.js
+		  format.html { render :partial => 'admin/pages/appendixes', :layout => false }
     end
 	end
 
@@ -110,7 +92,7 @@ class Admin::PagesController < AdminController
 		session[:selected_language] = params[:lang] || "cz"
 
 		respond_to do |format|
-			format.js
+			format.html { render :partial => 'admin/pages/list_pages', :layout => false }
     end
 	end
 	

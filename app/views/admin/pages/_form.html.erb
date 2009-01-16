@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td>Jazyk:</td>
-				<td><%= @f.select :language, (eval Configuration['site.langs']).map { |lng| [lng[lng.to_sym], lng] }, { :selected => @page.language || session[:selected_language] } %></td>
+				<td><%= @f.select :language, Configuration['site.langs'].map { |lng| [lng, lng] }, { :selected => @page.language || session[:selected_language] } %></td>
 			</tr>
 		</table>
 	</div>
@@ -47,9 +47,12 @@
 	<%= @f.text_area :body, { :rows => 20, :style => 'width: 100%;' } %>
 </div>
 
-<span class="small float-right"><%= link_to_remote '[přidat přílohu]', :url => { :action => 'add_appendix' } %></span>
-<div id="appendixes">
-	<%= render :partial => 'admin/pages/appendixes' %>
+<span class="small float-right"><%= link_to_remote '[+] přidat přílohu', { :url => '/admin/pages/add_appendix', :update => 'appendixes', :position => :bottom } %></span>
+<div id="appendixes-outer">
+	Přílohy:<br />
+	<div id="appendixes">
+		<%= render :partial => 'admin/pages/appendixes' %>
+	</div>
 </div>
 
 <div class="small">

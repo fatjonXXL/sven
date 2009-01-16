@@ -1,0 +1,15 @@
+cz:
+  cz: Čeština
+  en: English
+  czech: Čeština
+  english: English
+  
+  options: Nastavení
+  key: Klíč
+  value: Hodnota
+  
+  site:
+    title: Nadpis stránky
+    langs: Jazyky
+    description: Popis stránek
+    keywords: Klíčová slova

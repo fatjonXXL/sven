@@ -1,4 +1,4 @@
-Přílohy:<br />
 <% @page.annexes.each do |annex| %>
 	<%= appendixize annex %>
 <% end %>
+<%= "<span class=\"small\">Žádné přílohy</span>" if @page.annexes.empty? %>

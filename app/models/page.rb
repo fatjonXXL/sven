@@ -8,18 +8,21 @@ class Page < ActiveRecord::Base
 
 	acts_as_nested_set :text_column => 'title'
 	acts_as_paranoid
-	#acts_as_versioned
+	acts_as_versioned
 
 	belongs_to :layout
 	belongs_to :template, :class_name => 'ContentTemplate'
 	has_many :annexes
 	has_many :images
+	has_many :parts, :class_name => 'PagePart'
 	has_many :files, :class_name => 'Filet'
 	has_many :children, :class_name => 'Page', :foreign_key => 'parent_id', :dependent => :destroy
 	
 	set_inheritance_column :class_name
 
-	validates_presence_of :title, :layout, :status
+	validates_presence_of :title
+	validates_presence_of :layout
+	validates_presence_of :status
 
 	#define_index do
   #  indexes title, :sortable => true
@@ -88,7 +91,7 @@ class Page < ActiveRecord::Base
 		end
 
 		def descendants
-			[Page, Css, FileNotFoundPage, Rss, SearchPage].map { |klass| [klass.to_s[klass.to_s.downcase.to_sym], klass.to_s] }
+			[Page, Css, FileNotFoundPage, Rss, SearchPage].map { |klass| [klass.to_s, klass.to_s] }
 		end
 		
 		def get_select

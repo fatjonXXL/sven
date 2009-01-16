@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>render_tag (Sven::PageContext)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sven/page_context.rb, line 14</span>
+                <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_tag</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">attributes</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+                        <span class="ruby-identifier">binding</span> = <span class="ruby-ivar">@tag_binding_stack</span>.<span class="ruby-identifier">last</span>
+                        <span class="ruby-identifier">locals</span> = <span class="ruby-identifier">binding</span> <span class="ruby-value">? </span><span class="ruby-identifier">binding</span>.<span class="ruby-identifier">locals</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">globals</span>
+                        <span class="ruby-comment cmt">#set_process_variables(locals.page)</span>
+                        <span class="ruby-keyword kw">super</span>
+                <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                        <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">raise_errors?</span>
+                        <span class="ruby-ivar">@tag_binding_stack</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@tag_binding_stack</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">binding</span>
+                        <span class="ruby-identifier">render_error_message</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>)
+                <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,5 +1,5 @@
 class Admin::OptionsController < AdminController
-  permission_required :manage_options, :except => [ :edit, :update, :forgotten_password, :regenerate_password ]
+  permission_required :manage_options
 
   def index
 		@options = Configuration.all
@@ -12,12 +12,12 @@ class Admin::OptionsController < AdminController
     end
 
 		params[:option].each do |option|
-			Configuration[option[0]] = option[1].inspect
+			Configuration[option[0]] = option[1]
     end
 
 		respond_to do |format|
 			flash[:notice] = "Nastavení uloženo"
-			format.html { redirect_to(options_url) }
+			format.html { redirect_to(admin_options_url) }
     end
   end
 end

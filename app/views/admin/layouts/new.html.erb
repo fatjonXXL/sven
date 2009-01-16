@@ -2,6 +2,6 @@
 	Nový vzhled
 <% end %>
 
-<% form_for admin_layout_url( @layout ) do |@f| %>
+<% form_for (:layout, @layout, :url => { :action => 'create' }) do |@f| %>
 	<%= render :partial => 'admin/layouts/form' %>
 <% end %>

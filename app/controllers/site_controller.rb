@@ -1,5 +1,5 @@
 class SiteController < ApplicationController
-  session :off
+  #session :off
   skip_before_filter :verify_authenticity_token
 	
   def index
@@ -31,8 +31,7 @@ class SiteController < ApplicationController
   end
 
 	def change_language
-		Sven::LanguageHolder.language = params[:lang]
-
+		session[:lang] = params[:lang]
 		redirect_to :back
 	end
 	

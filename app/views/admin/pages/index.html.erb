@@ -1,7 +1,7 @@
 <% content_for :title do %>
 	Stránky
 <% end %>
-<table class="full-length" id="site-map" summary="">
+<table class="full-length" id="site-map">
 	<thead>
 		<tr>
 			<th class="page">Stránka</th>
@@ -10,13 +10,15 @@
 		</tr>
 	</thead>
 	<tbody id="pageslist">
-		<%= pages_list %>
+		<%= render :partial => 'admin/pages/list_pages' %>
 	</tbody>
 </table>
 <br />
+<% if Configuration['site.langs'].size > 1 %>
 <div>
 	Zobrazit jazyk:
-	<% (eval Configuration['site.langs']).each do |lang| %>
-	<%= link_to_remote image_tag("flagicons/#{lang}.png"), :url => admin_pages_list_url(lang) %>
+	<% Configuration['site.langs'].each do |lang| %>
+		<%= link_to_remote image_tag("flagicons/#{lang}.png"), :url => admin_pages_list_path(lang), :update => 'pageslist' %>
 	<% end %>
 </div>
+<% end %>

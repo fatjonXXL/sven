@@ -22,7 +22,7 @@ module Sven
 		}
 		tag 'full_title' do |tag|
 			site_title = Configuration['site.title'] || '"sven"'
-			"#{tag.locals.page.title} | #{eval site_title}"
+			"#{tag.locals.page.title} | #{site_title}"
     end
 		
 		desc %{
@@ -36,7 +36,7 @@ module Sven
 			Writes title for page, for example used in page body
 		}
 		tag 'site_title' do |tag|
-			"#{eval Configuration['site.title'] || '"sven"'}"
+			Configuration['site.title'] || "sven"
     end
 		
 		desc %{
@@ -83,7 +83,7 @@ desc %{
 			Returns <li> with language change text or flag
 		}
 		tag 'languages' do |tag|
-			@active_languages = eval Configuration['site.langs']
+			@active_languages = Configuration['site.langs']
 			@tag_attributes = tag.attr
 
 			File.open("#{RAILS_ROOT}/app/views/site/languages.html.erb", "r") do |erb|
@@ -794,8 +794,8 @@ desc %{
   tag 'meta:description' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
     page_description = CGI.escapeHTML(tag.locals.page.description)
-    page_description = nil if page_description == ""
-    site_description = eval(Configuration['site.description'] || 'nil')
+    page_description = '' if page_description == ""
+    site_description = Configuration['site.description'] || ''
     description = [page_description, site_description].join(',')
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
@@ -815,8 +815,8 @@ desc %{
   tag 'meta:keywords' do |tag|
     show_tag = tag.attr['tag'] != 'false' || false
     page_keywords = CGI.escapeHTML(tag.locals.page.keywords)
-    page_keywords = nil if page_keywords == ""
-    site_keywords = eval(Configuration['site.keywords'] || 'nil')
+    page_keywords = '' if page_keywords == ""
+    site_keywords = Configuration['site.keywords'] || ''
     keywords = [page_keywords, site_keywords].join(',')
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
@@ -859,10 +859,27 @@ desc %{
       end
     end
   end
+  
+  tag 'whereareyou' do |tag|
+    connector = tag.attr['connector'] || ">"
+    connector = " #{connector} "
+    
+    @path_arr = []
+    next_parent( tag.locals.page )
+    @path_arr.compact.reverse.map{ |path| "<a href=\"#{path.url}\">#{path.title}</a>" }.join(connector) << connector
+  end
 
   
   private
-  
+    def next_parent( page )
+      @path_arr << page.parent
+      
+      unless page.parent.blank?
+        next_parent( page.parent )
+      end
+      return true
+    end
+    
 		def children_find_options(tag)
 			attr = tag.attr.symbolize_keys
 

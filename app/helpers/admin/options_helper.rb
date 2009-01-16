@@ -1,8 +1,7 @@
 module Admin::OptionsHelper
 	def make_formable(option)
 		options = eval(option.values) unless option.values.blank?
-		value = eval(option.value)
-		value = "" if value.blank?
+		value = option.value || ""
 		
 		case option.option_type
 			when 'text'

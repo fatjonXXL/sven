@@ -3,15 +3,13 @@
 	<head>
 		<title>svenMS<%= ": #{yield :title}" if yield :title %></title>
 		<%= stylesheet_link_tag 'sven' %>
-		<%= javascript_include_tag 'openwysiwyg/scripts/wysiwyg.js', 'prototype', 'application' %>
-		<script type="text/javascript" src="/admin/pages/wysiwyg"></script>
-		<script type="text/javascript">
-		<!--
+		<%#= javascript_include_tag 'openwysiwyg/scripts/wysiwyg.js', 'application' %>
+		<!--<script type="text/javascript"
 		<% if @page and @page.class == Page %>
 		WYSIWYG.attach('all', settings);
 		<% end %>
-		//-->
 		</script>
+		//-->
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	</head>
 	<body>
@@ -80,5 +78,7 @@
 			<h1><%= yield :title %></h1>
 			<%= yield %>
 		</div>
+		
+		<%= javascript_include_tag :defaults, :cache => true %>
 	</body>
 </html>

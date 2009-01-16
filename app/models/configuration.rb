@@ -1,5 +1,6 @@
 class Configuration < ActiveRecord::Base
 	set_table_name :config
+  serialize :value
 
 	class << self
 		def [](key)
