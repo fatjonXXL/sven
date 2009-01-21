@@ -13,13 +13,13 @@
   <tr>
     <td><%= link_to user.login, edit_admin_user_path(user) %></td>
     <td><%=h user.current_or_last_at.to_s(:czech_time24) if user.current_or_last_at %></td>
-    <td><%= link_to user.current_or_last_ip, "http://www.db.ripe.net/whois?form_type=simple&full_query_string=&searchtext=#{user.current_or_last_ip}&submit.x=10&submit.y=7&submit=Search", { :rel => 'nofollow', :target => '_blank' } if user.current_or_last_ip %></td>
-    <td><%= link_to 'smazat', admin_user_url( user ), :confirm => 'Are you sure?', :method => :delete unless user.login == "admin" %></td>
+    <td><%= link_to user.current_or_last_ip, "http://whois.domaintools.com/#{user.current_or_last_ip}", { :rel => 'nofollow', :target => '_blank' } if user.current_or_last_ip %></td>
+    <td><%= delete_link admin_user_url( user ), :permission => nil unless user.login == "admin" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 <div>
-	<%= link_to "#{image_tag 'add-child.png'}&nbsp;Nový uživatel", new_admin_user_url %>
+	<%= add_link "Nový uživatel", new_admin_user_url %>
 </div>

@@ -1,0 +1,40 @@
+8
+
+dir
+44
+svn+ssh://czcomzc@comz.cz/home/czcomzc/svn/sven/plugins/commented/tasks
+svn+ssh://czcomzc@comz.cz/home/czcomzc/svn/sven
+
+
+
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53d77910-6968-477d-9cbf-f6f88b41b6e9
+
+commented_tasks.rake
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+8104d00769bfebd249555843d1788875
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+

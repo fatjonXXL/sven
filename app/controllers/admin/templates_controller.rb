@@ -1,6 +1,5 @@
-class Admin::TemplatesController < AdminController
-  permission_required :edit_content, { :except => [ :destroy ] }
-  permission_required :destroy_content, { :only => [ :destroy ] }
+class Admin::TemplatesController < ApplicationController
+  permission_required :edit_content, :except => [ :destroy ]
 
 	def index
 		@tmpls = ContentTemplate.all
@@ -49,10 +48,15 @@ class Admin::TemplatesController < AdminController
   end
 
 	def destroy
-		@tmpl = ContentTemplate.find params[:id]
-		@tmpl.destroy
+	  self.permission_options[:permission] = :destroy_content
+	  if check_permissions
+		  @tmpl = ContentTemplate.find params[:id]
+		  flash[:notice] = "Šablona \"#{@tmpl.name}\" byla smazána"
+		  @tmpl.destroy
 
-		flash[:notice] = "Šablona \"#{@tmpl.name}\" byla smazána"
-		redirect_to admin_templates_url
+		  respond_to do |format|
+		    format.html { redirect_to admin_templates_url }
+	    end
+	  end
 	end
 end

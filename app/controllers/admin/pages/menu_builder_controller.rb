@@ -1,4 +1,4 @@
-class Admin::Pages::MenuBuilderController < AdminController
+class Admin::Pages::MenuBuilderController < ApplicationController
   def index
     @menus = Menu.all
   end

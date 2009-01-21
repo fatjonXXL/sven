@@ -27,6 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     end
 	  
 	  admin.with_options :controller => 'admin/pages' do |pages|
+  		pages.version              'pages/version',               :action => 'versions'
   		pages.connect							 'pages/',											:action => 'create', :conditions => { :method => :post }
   		pages.page								 'pages/:id',										:action => 'update', :conditions => { :method => :put }
 
@@ -45,9 +46,9 @@ ActionController::Routing::Routes.draw do |map|
 	
   	admin.with_options :controller => 'admin/plugins' do |plugins|
   	  plugins.plugins            'plugins',                     :action => 'index'
-  	  plugins.info_plugin        'plugins/:id/info',            :action => 'info'
   	  plugins.edit_plugin        'plugins/:id',                 :action => 'edit'
-  	  plugins.plugin						 'plugins/:id',									:action => 'update', :conditions => { :method => :put }
+  	  plugins.info_plugin        'plugins/:id/info',            :action => 'info'
+  	  plugins.save_plugin				 'plugins/:id/save',						:action => 'update', :conditions => { :method => :put }
     end
 
   	admin.with_options :controller => 'admin/options' do |options|

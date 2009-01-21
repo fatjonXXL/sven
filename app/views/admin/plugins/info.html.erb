@@ -1,0 +1,29 @@
+<% content_for :title do %>
+	Plugin "<%= @plugin.name %>"
+<% end %>
+
+<div>
+	<strong>Popis:</strong><br />
+	<%= @plugin.description %>
+</div>
+
+<div>
+	<strong>Nastavení:</strong><br />
+	<ul class="show-li">
+	<%
+	Plugin.config( @plugin.to_s.downcase ).each do |param, values|
+			concat "<li>#{values['description']}: <em>#{ valuable( eval( values['value'] ) ) }</em></li>"
+	end
+	%>
+	</ul>
+</div>
+
+<div>
+	<strong>Verze:</strong><br />
+	<%= @plugin.version %>
+</div>
+
+<div>
+	<strong>Autor:</strong><br />
+	<%= @plugin.author %>
+</div>

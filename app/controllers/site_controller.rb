@@ -14,9 +14,9 @@ class SiteController < ApplicationController
     if Array === url
       url = url.join('/')
     end
-    url = url.to_s
+    full_url = url.to_s
 
-		requested_format = url.split('.')
+		requested_format = full_url.split('.')
 		if requested_format.size > 1
 			format = requested_format[1].to_sym
 			url = requested_format[0]
@@ -26,8 +26,13 @@ class SiteController < ApplicationController
 
 		url = "/" if url.match(/index/)
 
-    @page = Page.find_by_url("/#{url}")
-		show_uncached_page(url, format)
+    case full_url
+      when '/sitemap.xml'
+        render_sitemap_xml
+      else
+        @page = Page.find_by_url("/#{url}")
+		    show_uncached_page(url, format)
+	  end
   end
 
 	def change_language

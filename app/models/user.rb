@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :permissions
-  acts_as_authentic
+  acts_as_authentic :logged_in_timeout => 60.minutes
   
   def current_or_last_ip
     current_login_ip || last_login_ip

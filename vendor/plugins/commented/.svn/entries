@@ -1,0 +1,130 @@
+8
+
+dir
+44
+svn+ssh://czcomzc@comz.cz/home/czcomzc/svn/sven/plugins/commented
+svn+ssh://czcomzc@comz.cz/home/czcomzc/svn/sven
+
+
+
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+53d77910-6968-477d-9cbf-f6f88b41b6e9
+
+test
+dir
+
+app
+dir
+
+assets
+dir
+
+Rakefile
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+f7dc52e46823f5832ead873966b7830f
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+routes.rb
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+61e27b444a926919d7fe167aa7e589f6
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+db
+dir
+
+tasks
+dir
+
+init.rb
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+674cbb7a806a3aedf68a4a5bb3c2e760
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+lib
+dir
+
+install.rb
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+cbe738c10eba4ae2da8c6859c9723e44
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+MIT-LICENSE
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+ef8a8411d1f142aee549cd9a00a720d5
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+uninstall.rb
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+2a5fc883fe7f8dfe22ced24643d59ad4
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+
+README
+file
+
+
+
+
+2009-01-19T00:12:51.000000Z
+849b0a269de7842bc24a38a54bf16fd7
+2008-12-01T23:13:42.406913Z
+40
+czcomzc
+

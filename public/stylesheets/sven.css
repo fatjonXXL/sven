@@ -55,22 +55,29 @@ table thead { font-size: 120%; }
 #content .small { font-size: 12px; font-weight: bold; }
 .small td { width: 110px; }
 .small tr, .small td { height: 16px; }
-.small input, .small select { height: 14px; font-size: 10px; }
+.small input, .small select { height: 10px; font-size: 10px; }
 
 .float-right { float: right; margin-top: 12px; }
 .full-length { width: 100%; }
 
 .rounder {
-  -moz-border-radius: 6px;
-/**  background-image: url(../images/right-top-corner.png),
-                    url(../images/right-down-corner.png),
-                    url(../images/left-top-corner.png),
-                    url(../images/left-down-corner.png);
-  background-position: 100% 0, 100% 100%, 0 0, 0 100%;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-**/
-  border-radius: 6px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-opera-border-radius: 6px;
+	-moz-border-radius: 6px;
 }
 .cleaner { clear: both; }
 
 .trash-body { border: 2px solid black; width: 85%; padding: 15px; }
+
+.show-li { margin-left: 25px; }
+.show-li li { list-style-type: disc; }
+
+#tabs { background: url('/images/bottom-line.gif');	background-position: bottom; background-repeat: repeat-x; width: 100%; }
+#tabs li { background-color: #eae3c5; border-bottom: 1px solid #cdc295; color: black; display: inline-block; font-size: 100%; text-align: left; margin-right: 3px; padding: 15px; padding-top: 7px; padding-bottom: 4px; text-decoration: none; text-transform: titlecase; outline: none; -moz-outline: none;user-select: none;	cursor: pointer; }
+#tabs .active { background-color: white; border: 1px solid #cdc295; border-bottom: 1px solid white; font-weight: bold; padding-left: 13px; padding-right: 13px; padding-top: 6px; }
+#tabs-container #toolbar { float: right; margin-top: .35em; }
+#panes { background: white; width: 100%; overflow: auto; border: 1px solid #cdc295; border-top: 0px; }
+.pane { padding: 0px 0px; text-align: center; }
+.pane p { padding-left: 10px; text-align: left; }
+#panes div div { overflow: hidden; margin: 0px 0px; padding: 0px 0px; }

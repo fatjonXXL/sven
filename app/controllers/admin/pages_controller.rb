@@ -1,12 +1,12 @@
-class Admin::PagesController < AdminController
-  permission_required :edit_content, { :except => [:wysiwyg, :destroy] }
-  permission_required :destroy_content, { :only => [ :destroy ] }
+class Admin::PagesController < ApplicationController
+  permission_required :edit_content, :except => [ :destroy ]
   
 	def index
 	end
 
 	def new
 		@page = Page.new
+		@page.language = Configuration['site.langs'].first if Configuration['site.langs'].size == 1
 	end
 
 	def create
@@ -41,6 +41,7 @@ class Admin::PagesController < AdminController
 	def update
 		@page = Page.find(params[:id])
 
+    session[:last_body] = nil
 		flash[:notice] = "Stránka byla upravena" if @page.valid?
 		respond_to do |format|
 		  if params[:page]
@@ -63,13 +64,16 @@ class Admin::PagesController < AdminController
   end
 
 	def destroy
-		@page = Page.find( params[:id] )
-		unless @page.slug == '/' or (not @page.class == Page)
-			flash[:notice] = "Stránka \"#{@page.title}\" byla smazána"
-			@page.destroy
-		end
+	  self.permission_options[:permission] = :destroy_content
+	  if check_permissions
+	    @page = Page.find( params[:id] )
+	    unless @page.slug == '/' or (not @page.class == Page)
+		    flash[:notice] = "Stránka \"#{@page.title}\" byla smazána"
+		    @page.destroy
+	    end
 
-		redirect_to admin_pages_url
+		  redirect_to admin_pages_url
+	  end
 	end
 
 	def add_appendix
@@ -93,6 +97,24 @@ class Admin::PagesController < AdminController
 
 		respond_to do |format|
 			format.html { render :partial => 'admin/pages/list_pages', :layout => false }
+    end
+	end
+	
+	def versions
+	  @page = Page.find( params[ :page ] ) if params[ :page ]
+	  case params[ :version ].to_i
+      when 0
+	      body = session[ :last_body ].blank? ? @page.versions.last.body : session[ :last_body ]
+      when -1
+        session[ :last_body ] = params[ :page_body ]
+        body = false
+      else
+	      body = @page.versions.find( params[ :version ] ).body
+	      body = false if body.blank?
+	  end
+	  
+	  respond_to do |format|
+	    format.js { render :text => body }
     end
 	end
 	

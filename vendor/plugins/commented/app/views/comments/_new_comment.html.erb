@@ -1,0 +1,14 @@
+<% form_for @comment do |f| %>
+	<div class="comments-form">
+		<div id="author">
+			<%= ('author') %>: <%= f.text_field :author, { :maxsize => 60 } %>
+		</div>
+		<div id="subject">
+			<%= ('subject') %>: <%= f.text_field :subject %>
+		</div>
+		<div id="body">
+			<%= f.text_area :body %>
+		</div>
+		<div><%= f.submit "odeslat" %></div>
+	</div>
+<% end %>

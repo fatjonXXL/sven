@@ -1,0 +1,15 @@
+<% content_for :title do %>
+	Editace nastavení pluginu "<%= @plugin.name %>"
+<% end %>
+
+<% form_for :plugin, @plugin, :html => { :method => :put }, :url => admin_save_plugin_url( @plugin.to_s.downcase ) do |f| %>
+<table class="full-length">
+	<% Plugin.config( @plugin.to_s.downcase ).each do |param, values| %>
+	<tr class="small">
+		<td><%= values[ 'description' ] %>:</td>
+		<td><%= make_formable( values, 'plugin', :class => "small" ) %></td>
+	</tr>
+	<% end %>
+</table>
+<%= f.submit "nastavit" %>
+<% end %>

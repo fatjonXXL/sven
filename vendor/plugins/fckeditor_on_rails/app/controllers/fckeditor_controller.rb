@@ -1,11 +1,11 @@
 class FckeditorController < ApplicationController
   before_filter :get_options, :sanitize_directory
   layout false
-
+ 
   def index
     render :nothing => true unless RAILS_ENV == 'development'
   end
-
+ 
   def connector
     case params[:Command]
       when 'GetFoldersAndFiles', 'GetFolders'
@@ -16,20 +16,20 @@ class FckeditorController < ApplicationController
         upload_file
     end
   end
-
+ 
 private
-
+ 
   def get_folders_and_files
     @files = []
     @dirs = []
     dir = Dir.new(@options[:dir])
-
+ 
     dir.each do |x|
       next if x =~ /^\.\.?$/ # skip . and ..
       
       # actual file system path
       full_path = File.join(@options[:dir], x)
-
+ 
       # found a directory add it to the list
       if File.directory?(full_path)
         @dirs << x
@@ -40,10 +40,10 @@ private
         @files << { :name => x, :size => size };
       end
     end
-
+ 
     render :template => 'fckeditor/files_and_folders'
   end
-
+ 
   # create a new directory
   def create_folder
     begin
@@ -60,7 +60,7 @@ private
     end
     render :template => 'fckeditor/create_folder'
   end
-
+ 
   # upload a new file
   # currently the FCKeditor docs only allow for 2 errors here
   # file renamed and invalid file name
@@ -73,7 +73,7 @@ private
     # we need this to check the types and to build new names if necessary
     ext = File.extname(@file_name)
     path = File.basename(@file_name, ext)
-
+ 
     # check to make sure this extension isn't in deny and is in allow
     filetype = params[:Type].downcase.to_sym
     if type_allowed(filetype, ext)
@@ -82,7 +82,7 @@ private
         @error = 201
         counter += 1
       end
-
+ 
       File.open("#{@options[:dir]}#{@file_name}", 'wb') do |f| 
         f.write(params[:NewFile].read)
       end
@@ -90,17 +90,17 @@ private
       # invalid file type
       @error = 202
     end
-
+ 
     render :template => 'fckeditor/upload_file'
   end
-
+ 
   def type_allowed(filetype, ext)
     type = Fckeditor.config[:file_types][filetype]
     
     (! type[:deny] || ! type[:deny].include?(ext)) &&
       (! type[:allow] || type[:allow].include?(ext))
   end
-
+ 
   def get_options
     @error = 0
     @options = {}

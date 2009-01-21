@@ -1,6 +1,5 @@
-class Admin::LayoutsController < AdminController
-  permission_required :edit_content, { :except => [ :destroy ] }
-  permission_required :destroy_content, { :only => [ :destroy ] }
+class Admin::LayoutsController < ApplicationController
+  permission_required :edit_content, :except => [ :destroy ]
 	
   def index
 		@layouts = Layout.all
@@ -50,11 +49,15 @@ class Admin::LayoutsController < AdminController
 	end
 
 	def destroy
-		@layout = Layout.find params[:id]
-		@layout.destroy
+	  self.permission_options[:permission] = :destroy_content
+	  if check_permissions
+		  @layout = Layout.find params[:id]
+		    flash[:notice] = "Vzhled #{@layout.name} byl smazán"
+		  @layout.destroy
 
-		respond_to do |format|
-			format.html { redirect_to admin_layouts_url }
+		  respond_to do |format|
+			  format.html { redirect_to admin_layouts_url }
+      end
     end
 	end
 end

@@ -1,4 +1,4 @@
-class Admin::UsersController < AdminController
+class Admin::UsersController < ApplicationController
   permission_required :manage_users, :except => [ :edit, :update, :forgotten_password, :regenerate_password ]
   before_filter :permissions
   before_filter :load_user_using_perishable_token, :only => [ :restore_password, :process_restore_password ]
@@ -61,7 +61,7 @@ class Admin::UsersController < AdminController
       flash[:notice] = "Instrukce pro resetování hesla Vám byly zaslány na email.<br />Zkontrolujte si Vaši schránku."
       redirect_back_or_default admin_url
     else
-      flash[:notice] = "Žádný uživatel s tímto emailem neexistuje."
+      flash[:error] = "Žádný uživatel s tímto emailem neexistuje."
       render :action => :forgotten_password
     end
   end
@@ -88,7 +88,7 @@ class Admin::UsersController < AdminController
     def load_user_using_perishable_token
       @user = User.find_using_perishable_token(params[:id])
       unless @user
-        flash[:notice] = "Omlouvám se, ale žádný takový účet neexistuje. Zkuste zkopírovat adresu z emailu, nebo celý proces zopakovat."
+        flash[:error] = "Omlouvám se, ale žádný takový účet neexistuje. Zkuste zkopírovat adresu z emailu, nebo celý proces zopakovat."
         redirect_to admin_url
       end
     end

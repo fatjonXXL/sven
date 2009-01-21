@@ -1,0 +1,26 @@
+--- 
+showtime: 
+  value: "false"
+  values: "[ [ 'ano', true ], [ 'ne', false ] ]"
+  option_type: radio
+  description: "Zobrazovat \xC4\x8Das"
+  key: showtime
+onpage: 
+  value: "1000"
+  option_type: text
+  description: !binary |
+    S29tZW50w6HFmcWvIG5hIHN0csOhbmNl
+
+  key: onpage
+showurl: 
+  value: "false"
+  values: "[ [ 'ano', true ], [ 'ne', false ] ]"
+  option_type: radio
+  description: Zobrazovat URL
+  key: showurl
+akismet: 
+  value: "false"
+  values: "[ [ 'ano', true ], [ 'ne', false ] ]"
+  option_type: radio
+  description: "Pou\xC5\xBE\xC3\xADvat AKISMET filtr SPAMu"
+  key: akismet

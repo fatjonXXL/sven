@@ -19,4 +19,4 @@ I18n.backend.send(:init_translations)
 I18n.default_locale = 'cz'
 
 AVAILABLE_LOCALES = I18n.backend.available_locales
-RAILS_DEFAULT_LOGGER.debug "* Loaded locales: #{AVAILABLE_LOCALES.inspect}"
+RAILS_DEFAULT_LOGGER.debug "* Loaded locales: #{ AVAILABLE_LOCALES.join( ', ') }"

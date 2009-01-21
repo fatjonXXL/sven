@@ -1,3 +1,5 @@
+<%= error_messages_for 'page', :object => @page %>
+
 <div>
 	Titulek:
 	<%= @f.text_field :title, { :size => 60 } %><br />
@@ -11,7 +13,7 @@
 			</tr>
 			<tr>
 				<td>Adresa:</td>
-				<td><%= @f.text_field :slug %></td>
+				<td><%= @f.text_field :slug, { :class => "small" } %></td>
 			</tr>
 			<tr>
 				<td>Stav:</td>
@@ -27,24 +29,45 @@
 			</tr>
 			<tr>
 				<td>Popis:</td>
-				<td><%= @f.text_field :description %></td>
+				<td><%= @f.text_field :description, { :class => "small" } %></td>
 			</tr>
 			<tr>
 				<td>Klíčová slova:</td>
-				<td><%= @f.text_field :keywords %></td>
+				<td><%= @f.text_field :keywords, { :class => "small" } %></td>
 			</tr>
+			<% if Configuration['site.langs'].size > 1 %>
 			<tr>
 				<td>Jazyk:</td>
 				<td><%= @f.select :language, Configuration['site.langs'].map { |lng| [lng, lng] }, { :selected => @page.language || session[:selected_language] } %></td>
 			</tr>
+			<% else %>
+				<%= @f.hidden_field :language %>
+			<% end %>
 		</table>
 	</div>
 	<div class="cleaner"></div>
 </div>
 
-<div>
-	Obsah:<br />
-	<%= @f.text_area :body, { :rows => 20, :style => 'width: 100%;' } %>
+<div id="wrapper">
+	<div id="tabs-container">
+		<ul id="tabs">
+			<li>Obsah</li>
+			<li>Druha</li>
+		</ul>
+	</div>
+	<div id="panes">
+		<div id="panes-container">
+			<div class="pane small" id="body">
+			<% unless @page.new_record? %>
+				<p>Vrátit na verzi: <%= select :version, nil, [ [ "---", 0 ] ] + @page.versions.reverse.collect{ |v| ["##{v.id}", v.id] }, {}, { :onchange => remote_function( :url => '/admin/pages/version/', :method => :get, :data => "'page=#{@page.id}&version=' + this.value", :onComplete => "function(response, responseJS, responseHTML) { if( responseHTML != 'false' ) { $('page_body').value = responseHTML; } }" ) } %></p>
+			<% end %>
+				<%= ( @page and @page.class == Page ) ? fckeditor( :page, :body, {:width => '98%', :height => '300px'} ) : @f.text_area( :body, { :rows => 20, :style => 'width: 98%;', :onchange => remote_function( :url => '/admin/pages/version/', :method => :get, :data => "'version=-1&page_body='+this.value" ) } ) %>
+			</div>
+			<div class="pane">
+			<textarea style="width: 98%; height: 300px;">asdasd</textarea>
+			</div>
+		</div>
+	</div>
 </div>
 
 <span class="small float-right"><%= link_to_remote '[+] přidat přílohu', { :url => '/admin/pages/add_appendix', :update => 'appendixes', :position => :bottom } %></span>

@@ -1,0 +1,21 @@
+<% content_for :title do %>
+	Pluginy
+<% end %>
+
+<table class="full-length small">
+  <tr>
+    <th>Název</th>
+    <th>Popis</th>
+    <th>Možnosti</th>
+  </tr>
+<% for plugin in @plugins %>
+  <tr>
+ 		<td><%= plugin.name %></td>
+ 		<td><%= plugin.description %></td>
+		<td>
+			<%= info_link admin_info_plugin_url( plugin.to_s.downcase ) %>
+			<%= link_to "nastavení", admin_edit_plugin_url( plugin.to_s.downcase ), icon( :table_edit ) %>
+		</td>
+  </tr>
+<% end %>
+</table>

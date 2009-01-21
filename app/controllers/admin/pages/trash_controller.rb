@@ -1,4 +1,4 @@
-class Admin::Pages::TrashController < AdminController
+class Admin::Pages::TrashController < ApplicationController
   def index
     @pages = Page.find_only_deleted(:all)
   end

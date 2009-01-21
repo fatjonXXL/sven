@@ -1,4 +1,4 @@
-class Admin::OptionsController < AdminController
+class Admin::OptionsController < ApplicationController
   permission_required :manage_options
 
   def index

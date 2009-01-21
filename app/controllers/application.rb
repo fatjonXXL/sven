@@ -55,31 +55,27 @@ class ApplicationController < ActionController::Base
   
   cattr_accessor :permission_options
   def self.permission_required(permission = :no_permission, options = {})
-    return false if permission.blank?
-    
-    self.permission_options = options
-    self.permission_options[:permission] = permission
-    self.permission_options[:user] = true unless self.permission_options[:user].blank?
-    
+    self.permission_options = { :permission => permission }.merge( options )
     before_filter :check_permissions, self.permission_options
   end
   
+  
   def check_permissions
-    unless self.permission_options[:user] == false or self.permission_options[:permission] == :no_permission
-      unless current_user
-        flash[:notice] = "Musíte být přihlášeni pro přístup do této sekce."
-        redirect_to admin_session_url
+    unless current_user
+      flash[:error] = "Musíte být přihlášeni pro přístup do této sekce."
+      redirect_to admin_session_url
+      return false
+    end
+  
+    unless self.permission_options[:permission] == :no_permission
+      unless current_user.has_permission?( self.permission_options[:permission] )
+        flash[:error] = "Přístup zakázán.<br />Kontaktujte svého administrátora na adrese <a href=\"mailto:#{ User.first(:conditions => { :login => 'admin' }).email }\">#{ User.first(:conditions => { :login => 'admin' }).email }</a>" #<< self.permission_options.inspect << "<br />" << request.request_uri
+        redirect_to ( request.env['HTTP_REFERER'] || admin_pages_url )
         return false
       end
-    
-      #unless self.permission_options[:permission] == :no_permission
-        unless current_user.has_permission?( self.permission_options[:permission] )
-          flash[:notice] = "Přístup zakázán.<br />Kontaktujte svého administrátora na adrese <a href=\"mailto:#{ User.find(:first, :conditions => { :login => 'admin' }).email }\">#{ User.find(:first, :conditions => { :login => 'admin' }).email }</a>" #<< self.permission_options.inspect << "<br />" << request.request_uri
-          redirect_to ( request.env['HTTP_REFERER'] || admin_pages_url )
-          return false
-        end
-      #end  
     end
+    
+    return true
   end
     
   protected

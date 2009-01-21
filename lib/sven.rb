@@ -12,3 +12,5 @@ module Sven
 		end
 	end
 end
+
+require 'lib/sven/nil_ext'

@@ -1,0 +1,15 @@
+body { font: 10pt; font-family: Candara, Verdana; text-align: justify; background: white; }
+h3, h4, h5, h6 { padding: 0px 0px; margin: 0px 0px; } 
+h3 { font-size: 20pt; font-weight: normal; color: #1e1a19; }
+h4 { font-size: 17pt; }
+h5 { font-size: 14pt; }
+h6 { font-size: 11pt; }
+
+a { color: #a3e73b; font-weight: bold; }
+a:hover { text-decoration: underline; }
+p { padding: 0px 0px; margin: 0px 0px; margin-top: 5px; }
+strong { background: #c5c6ba; }
+em { padding: 6px 6px; border-left: 8px solid #c5c6ba; display: block; }
+em:before, em:after { content: '"'; font-size: 16pt; }
+code { background-color:#F8F8FF; border:1px solid #DEDEDE; color:#444444; padding:0.2em 0.5em; }
+pre { border: 1px dotted black; background: silver; display: block; }

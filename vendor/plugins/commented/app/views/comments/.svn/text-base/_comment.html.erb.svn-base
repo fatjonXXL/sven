@@ -1,0 +1,5 @@
+<div class="comment">
+	<h5><%= h comment.subject %></h5>
+	<small><%= h infoize(comment) %></small>
+	<div class="body"><%= h comment.body %></div>
+</div>

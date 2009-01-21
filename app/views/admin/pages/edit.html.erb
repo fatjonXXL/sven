@@ -1,5 +1,5 @@
 <% content_for :title do %>
-	Editace stánky "<%= @page.title %>"
+	Editace stránky "<%= @page.title %>"
 <% end %>
 
 <% form_for :page, @page, :url => admin_page_path(@page), :html => { :multipart => true, :method => :put } do |@f| %>

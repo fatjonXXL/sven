@@ -1,4 +1,6 @@
-class Admin::SessionController < AdminController
+class Admin::SessionController < ApplicationController
+  #permission_required :no_permission, { :user => false }
+  
   def new
     @user_session = UserSession.new
   end
@@ -9,7 +11,7 @@ class Admin::SessionController < AdminController
       flash[:notice] = "Přihlášení proběhlo úspěšně"
       redirect_back_or_default admin_url
     else
-      flash[:notice] = "Neplatné uživatelské jméno nebo heslo. Opakujte přihlášení znovu"
+      flash[:error] = "Neplatné uživatelské jméno nebo heslo. Opakujte přihlášení znovu"
       render :action => :new
     end
   end
