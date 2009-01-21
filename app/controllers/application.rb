@@ -62,6 +62,7 @@ class ApplicationController < ActionController::Base
   
   def check_permissions
     unless current_user
+      store_location
       flash[:error] = "Musíte být přihlášeni pro přístup do této sekce."
       redirect_to admin_session_url
       return false
