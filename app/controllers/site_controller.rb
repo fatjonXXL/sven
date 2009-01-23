@@ -52,6 +52,7 @@ class SiteController < ApplicationController
   end
   
   def sitemap
+    @site = "#{request.protocol}#{request.host}"
     @pages = Page.all( :conditions => { :class_name => "Page", :status_id => Status[:published].id }, :order => 'lft, title' )
     respond_to do |format|
       format.xml { render :action => :sitemap, :layout => false }
