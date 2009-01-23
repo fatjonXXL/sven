@@ -14,9 +14,9 @@ class SiteController < ApplicationController
     if Array === url
       url = url.join('/')
     end
-    full_url = url.to_s
+    url = url.to_s
 
-		requested_format = full_url.split('.')
+		requested_format = url.split('.')
 		if requested_format.size > 1
 			format = requested_format[1].to_sym
 			url = requested_format[0]
@@ -24,15 +24,21 @@ class SiteController < ApplicationController
 			format = :html
     end
 
-		url = "/" if url.match(/index/)
+		url = "/" if url.match(/index(.*)/)
 
-    case full_url
-      when '/sitemap.xml'
-        render_sitemap_xml
-      else
-        @page = Page.find_by_url("/#{url}")
-		    show_uncached_page(url, format)
-	  end
+    @page = Page.find_by_url("/#{url}")
+  
+    unless @page.nil?
+			case @page.status
+				when Status[:published], Status[:hidden]
+					@page.process(request, response, format)
+					@performed_render = true
+				else
+					render_not_found_page
+      end
+    else
+      render_not_found_page
+    end
   end
 
 	def change_language
@@ -45,18 +51,10 @@ class SiteController < ApplicationController
 	  redirect_to SearchPage.page.url
   end
   
-  private
-    def show_uncached_page(url, format = :html)
-      unless @page.nil?
-				case @page.status
-					when Status[:published], Status[:hidden]
-						@page.process(request, response, format)
-						@performed_render = true
-					else
-						render_not_found_page
-        end
-      else
-        render_not_found_page
-      end
+  def sitemap
+    @pages = Page.all( :conditions => { :class_name => "Page", :status_id => Status[:published].id }, :order => 'lft, title' )
+    respond_to do |format|
+      format.xml { render :action => :sitemap, :layout => false }
     end
+  end
 end

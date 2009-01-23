@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 	def render_not_found_page
 		FileNotFoundPage.process(request, response)
 		@performed_render = true
-	end 
+	end
 	  
 	def available_locales
     AVAILABLE_LOCALES

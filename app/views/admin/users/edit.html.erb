@@ -2,8 +2,8 @@
 	<%= @user == current_user ? "Můj profil" : "Editace uživatele \"#{@user.login}\"" %>
 <% end %>
 
-<% form_for :user, @user, :url => admin_user_url( @user ) do |f| %>
+<% form_for :user, @user, :url => admin_user_url( @user ), :html => { :method => :put } do |f| %>
   <%= f.error_messages %>
   <%= render :partial => "form", :object => f %>
-  <%= f.submit "upravit" %>
+  <%= f.submit "upravit" %>, <%= link_to "změnit heslo"%> nebo <%= link_to "zpět", :back %>
 <% end %>

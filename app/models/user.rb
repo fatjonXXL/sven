@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :permissions
-  acts_as_authentic :logged_in_timeout => 60.minutes
+  acts_as_authentic :logged_in_timeout => 60.minutes, :password_field_validates_presence_of_options => { :on => :update, :if => :update_password? }
+  
+  attr_accessor :dont_update_password
   
   def current_or_last_ip
     current_login_ip || last_login_ip
@@ -27,4 +29,9 @@ class User < ActiveRecord::Base
   def self.generate_password
     Base64.encode64( Digest::SHA1.digest( "#{rand(1<<64)}/#{Time.now.to_f}/#{Process.pid}" ) )[0..8]
   end
+  
+  private
+    def update_password?
+      not @dont_update_password
+    end
 end

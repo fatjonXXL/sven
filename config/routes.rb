@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 #	map.admin '/admin', :controller => 'admin'
 	map.resource :admin, :controller => 'admin' do |admin|
-    admin.resources :users, :controller => 'admin/users'
+    admin.resources :users, :controller => 'admin/users', :member => { :password_change => :get }
     admin.resources :layouts, :controller => 'admin/layouts'
 	  admin.resources :templates, :controller => 'admin/templates'
 	  #admin.resources :menus, :path_prefix => 'admin/pages', :controller => 'admin/pages/menu_builder', :member => { :add_child => :get, :process_add_child => :post }
@@ -69,6 +69,7 @@ ActionController::Routing::Routes.draw do |map|
 		site.search                'find/:search',                  :action => 'search'
     site.not_found						 'error/404',                     :action => 'not_found'
     site.error								 'error/500',                     :action => 'error'
+    site.sitemap               'sitemap.xml',                   :action => 'sitemap'
     
     site.connect							 '*url',                          :action => 'show_page'
   end
