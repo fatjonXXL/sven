@@ -17,3 +17,4 @@ class Admin::Pages::TrashController < ApplicationController
     redirect_to admin_page_trash_url
   end
 end
+hi was geht ab alter 
